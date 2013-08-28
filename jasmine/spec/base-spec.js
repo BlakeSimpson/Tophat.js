@@ -5,7 +5,7 @@ describe( "Klass", function() {
     expect( th.Klass ).toBeDefined();
   } );
 
-  it( "should have base method", function() {
+  it( "should have extend method", function() {
     expect( th.Klass.extend ).toBeFunction();
   } );
 
@@ -49,7 +49,7 @@ describe( "Klass", function() {
     expect( lila.random ).not.toBeDefined();
   } );
 
-  it( "should create sub classes", function() {
+  it( "should allow sub classing", function() {
     var Mammal = th.Klass.extend( {
       breath: function() {}
     } );
@@ -60,8 +60,8 @@ describe( "Klass", function() {
 
     var fry = new Human();
 
-    expect( fry.breath ).toBeTruthy();
-    expect( fry.walk ).toBeTruthy();
+    expect( fry.breath ).toBeFunction();
+    expect( fry.walk ).toBeFunction();
   } );
 
 } );
