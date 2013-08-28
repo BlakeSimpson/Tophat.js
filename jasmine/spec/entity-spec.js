@@ -7,7 +7,6 @@ describe( "Entity", function() {
     mockCTX();
 
     animation = new th.Entity( {
-      animate: true,
       delay: 2,
       frames: 10
     } );
@@ -19,11 +18,10 @@ describe( "Entity", function() {
 
   it( "should set its image correctly", function() {
     entity.setImage( "planet-express.png" );
-    expect( entity.image ).toBe( "planet-express.png" );
+    expect( entity.image instanceof Image ).toBeTruthy();
   } );
 
   it( "should allow animation", function() {
-    expect( animation.animate ).toBe( true );
     spyOn( animation, "_updateFrame" );
 
     animation.tick();
@@ -43,10 +41,12 @@ describe( "Entity", function() {
     expect( entity.draw ).toBeFunction();
 
     spyOn( entity, "_drawImage" );
+    spyOn( entity, "_updateFrame" );
     entity.setImage( "planet-express.png" );
     entity.tick();
 
     expect( entity._drawImage ).toHaveBeenCalled();
+    expect( entity._updateFrame ).not.toHaveBeenCalled();
   } );
 
   it( "should draw shape", function() {

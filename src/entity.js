@@ -5,13 +5,13 @@
       this.active = true;
       this.color = null;
       this.image = null;
-      this.animate = false;
       this.width = 0;
       this.height = 0;
       this.x = 0;
       this.y = 0;
 
       // Animation attributes
+      this.animate = false;
       this.delay = 1;
       this.frames = 1;
       this.currentFrame = 0;
@@ -30,7 +30,7 @@
 
       this.draw();
 
-      if ( this.animate ) {
+      if ( this.frames > 1 ) {
         this._updateFrame();
       }
     },
@@ -65,9 +65,17 @@
      * @param {String} image path
      */
     setImage: function ( path ) {
-      this.image = path;
+      this.image = ( this.image instanceof Image ) ? this.image : new Image();
+      this.image.src = path;
     },
 
+    /**
+     * @method _drawImage
+     * @private
+     * @param {Object} canvas context
+     * Draw the image to the canvas taking into
+     * account possible clipping for animation
+     */
     _drawImage: function ( ctx ) {
       var left = this.currentFrame * this.width;
 
@@ -83,6 +91,12 @@
                    );
     },
 
+    /**
+     * @method _drawShape
+     * @private
+     * @param {Object} canvas context
+     * Draw a rectangle to the canvas in the given color
+     */
     _drawShape: function ( ctx ) {
       ctx.beginPath();
       ctx.fillStyle = this.color;
@@ -101,10 +115,10 @@
       if ( this.currentDelay !== this.delay ) { return;}
 
       if ( this.currentFrame === ( this.frames - 1) ) {
-        if ( attrs.loop ) {
+        if ( this.loop ) {
           this.currentFrame = 0;
         } else {
-          this.destroy();
+          this.active = false;
         }
       } else {
         this.currentFrame += 1;
