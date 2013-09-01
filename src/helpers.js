@@ -9,7 +9,7 @@
           window.oRequestAnimationFrame      ||
           window.msRequestAnimationFrame     ||
           function( cb ) {
-              window.setTimeout( cb, 1000 / 60 );
+            window.setTimeout( cb, 1000 / 60 );
           }
       );
 
@@ -17,10 +17,11 @@
     },
 
     collision: function( entityA, entityB ) {
-      if ( typeof entityA === "undefined"
-          || typeof entityB === "undefined"
-          || !entityA.active
-          || !entityB.active ) {
+      if ( typeof entityA === "undefined" ||
+        typeof entityB === "undefined" ||
+        !entityA.active ||
+        !entityB.active ) {
+
         return false;
       }
 

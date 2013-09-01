@@ -62,7 +62,7 @@ describe( "Entity", function() {
 
   it( "should not draw when not active", function() {
     spyOn( entity, "draw" );
-    entity.set( {active: false} )
+    entity.set( {active: false} );
     entity.tick();
 
     expect( entity.draw ).not.toHaveBeenCalled();

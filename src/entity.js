@@ -10,7 +10,7 @@
     rightCenter: "RIGHT_CENTER",
     rightTop: "RIGHT_TOP",
     rightBottom: "RIGHT_BOTTOM"
-  }
+  };
   th.POSITIONS = POSITIONS;
 
   var Entity = global.th.Klass.extend( {
@@ -93,7 +93,7 @@
         x = xCenter;
         y = 0;
       } else if ( place === POSITIONS.centerBottom ) {
-        x = xCenter
+        x = xCenter;
         y = ~~( height - this.height );
       } else if ( place === POSITIONS.leftCenter ) {
         x = 0;

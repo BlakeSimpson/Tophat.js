@@ -3,7 +3,7 @@ describe( "Text", function() {
   var text;
 
   beforeEach( function() {
-    entity = new th.Text();
+    text = new th.Text();
     mockCTX();
   } );
 
@@ -12,27 +12,27 @@ describe( "Text", function() {
   } );
 
   it( "should set content", function() {
-    expect( entity.content ).toEqual( "" );
-    entity.setContent( "Planet Express" );
-    expect( entity.content ).toEqual( "Planet Express" );
+    expect( text.content ).toEqual( "" );
+    text.setContent( "Planet Express" );
+    expect( text.content ).toEqual( "Planet Express" );
   } );
 
   it( "should update position", function() {
-    expect( entity.update ).toBeFunction();
+    expect( text.update ).toBeFunction();
 
-    spyOn( entity, "update" );
-    entity.update( 101, 251 );
+    spyOn( text, "update" );
+    text.update( 101, 251 );
 
-    expect( entity.update ).toHaveBeenCalledWith( 101, 251 );
+    expect( text.update ).toHaveBeenCalledWith( 101, 251 );
   } );
 
   it( "should draw text", function() {
-    expect( entity.draw ).toBeFunction();
+    expect( text.draw ).toBeFunction();
 
-    spyOn( entity, "draw" );
-    entity.tick();
+    spyOn( text, "draw" );
+    text.tick();
 
-    expect( entity.draw ).toHaveBeenCalled();
+    expect( text.draw ).toHaveBeenCalled();
   } );
 
   it( "should set cycles", function() {
