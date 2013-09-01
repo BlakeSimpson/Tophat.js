@@ -15,16 +15,19 @@ beforeEach( function() {
 } );
 
 function mockCTX () {
-  window.oldCTX = window.ctx;
+  window.oldCTX = window.th.ctx;
 
-  window.ctx = {
+  window.th.ctx = {
     drawImage: function() {},
     beginPath: function() {},
     fillRect: function() {},
-    fillStyle: function() {}
+    fillStyle: function() {},
+    fillText: function() {},
+    save: function() {},
+    restore: function() {}
   };
 };
 
 function cleanCTXMock () {
-  window.ctx = window.oldCTX;
+  window.th.ctx = window.oldCTX;
 }

@@ -1,17 +1,19 @@
 (function( global ) {
 
   var helpers = {
-    requestAnimationFrame: function() {
-      return (
+    requestAnimationFrame: function( callback ) {
+      var func = (
           window.requestAnimationFrame       ||
           window.webkitRequestAnimationFrame ||
           window.mozRequestAnimationFrame    ||
           window.oRequestAnimationFrame      ||
           window.msRequestAnimationFrame     ||
-          function( callback ) {
-              window.setTimeout( callback, 1000 / 60 );
+          function( cb ) {
+              window.setTimeout( cb, 1000 / 60 );
           }
       );
+
+      return func( callback );
     },
 
     collision: function( entityA, entityB ) {

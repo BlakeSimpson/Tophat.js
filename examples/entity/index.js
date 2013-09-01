@@ -8,7 +8,7 @@
     canvas.height = canvas.clientHeight;
     ctx = canvas.getContext( "2d" );
 
-    window.ctx = ctx;
+    th.ctx = ctx;
 
     red = new th.Entity( {
       x: 20,
@@ -40,8 +40,7 @@
   };
 
   function nextFrame () {
-    var frame = th.helpers.requestAnimationFrame();
-    frame( loop );
+    th.helpers.requestAnimationFrame( loop );
   }
 
   function loop () {

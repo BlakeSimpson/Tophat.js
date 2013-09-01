@@ -40,7 +40,7 @@
      * Draw current entity to canvas
      */
     draw: function () {
-      var ctx = window.ctx;
+      var ctx = th.ctx;
 
       if ( this.color ) {
         this._drawShape( ctx );
