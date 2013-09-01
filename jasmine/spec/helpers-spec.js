@@ -1,4 +1,4 @@
-describe( "helpers", function() {
+describe( "Helpers", function() {
   var helpers = th.helpers;
 
   it( "requestAnimFrame()", function() {

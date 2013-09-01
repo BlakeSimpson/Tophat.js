@@ -69,3 +69,79 @@ describe( "Entity", function() {
   } );
 
 } );
+
+describe( "Entity positions", function() {
+
+  var entity;
+
+  beforeEach( function() {
+    entity = new th.Entity( {
+      width: 10,
+      height: 10,
+      color: "#f00"
+    } );
+
+    th.canvas = {
+      width: 100,
+      height: 100
+    };
+  } );
+
+  it( "should have a global", function() {
+    expect( th.POSITIONS ).toBeTruthy();
+  } );
+
+  it( "should correctly positon center", function() {
+    entity.position( th.POSITIONS.center );
+    expect( entity.x ).toBe( 45 );
+    expect( entity.y ).toBe( 45 );
+  } );
+
+  it( "should correctly positon center top", function() {
+    entity.position( th.POSITIONS.centerTop );
+    expect( entity.x ).toBe( 45 );
+    expect( entity.y ).toBe( 0 );
+  } );
+
+  it( "should correctly positon center bottom", function() {
+    entity.position( th.POSITIONS.centerBottom );
+    expect( entity.x ).toBe( 45 );
+    expect( entity.y ).toBe( 90 );
+  } );
+
+  it( "should correctly positon left center", function() {
+    entity.position( th.POSITIONS.leftCenter );
+    expect( entity.x ).toBe( 0 );
+    expect( entity.y ).toBe( 45 );
+  } );
+
+  it( "should correctly positon right center", function() {
+    entity.position( th.POSITIONS.rightCenter );
+    expect( entity.x ).toBe( 90 );
+    expect( entity.y ).toBe( 45 );
+  } );
+
+  it( "should correctly positon left top", function() {
+    entity.position( th.POSITIONS.leftTop );
+    expect( entity.x ).toBe( 0 );
+    expect( entity.y ).toBe( 0 );
+  } );
+
+  it( "should correctly positon right top", function() {
+    entity.position( th.POSITIONS.rightTop );
+    expect( entity.x ).toBe( 90 );
+    expect( entity.y ).toBe( 0 );
+  } );
+
+  it( "should correctly positon left bottom", function() {
+    entity.position( th.POSITIONS.leftBottom );
+    expect( entity.x ).toBe( 0 );
+    expect( entity.y ).toBe( 90 );
+  } );
+
+  it( "should correctly positon right bottom", function() {
+    entity.position( th.POSITIONS.rightBottom );
+    expect( entity.x ).toBe( 90 );
+    expect( entity.y ).toBe( 90 );
+  } );
+} );

@@ -1,5 +1,18 @@
 (function( global ) {
 
+  var POSITIONS = {
+    center: "CENTER",
+    centerTop: "CENTER_TOP",
+    centerBottom: "CENTER_BOTTOM",
+    leftCenter: "LEFT_CENTER",
+    leftTop: "LEFT_TOP",
+    leftBottom: "LEFT_BOTTOM",
+    rightCenter: "RIGHT_CENTER",
+    rightTop: "RIGHT_TOP",
+    rightBottom: "RIGHT_BOTTOM"
+  }
+  th.POSITIONS = POSITIONS;
+
   var Entity = global.th.Klass.extend( {
     init: function ( options ) {
       this.active = true;
@@ -55,9 +68,54 @@
      * @param {Number} y
      * Update the X/Y location attributes
      */
-    update: function( x, y ) {
-      this.x = x;
-      this.y = y;
+    update: function ( x, y ) {
+      this.x = x || 0;
+      this.y = y || 0;
+    },
+
+    /**
+     * @method position
+     * @param {String} placement
+     * Auto update the X/Y to match placement
+     */
+    position: function ( place ) {
+      var x, y, xCenter, yCenter,
+        width = th.canvas.width,
+        height = th.canvas.height;
+
+      yCenter = ~~( height / 2 ) - ~~( this.height / 2 );
+      xCenter = ~~( width / 2 ) - ~~( this.width / 2 );
+
+      if ( place === POSITIONS.center ) {
+        x = xCenter;
+        y = yCenter;
+      } else if ( place === POSITIONS.centerTop ) {
+        x = xCenter;
+        y = 0;
+      } else if ( place === POSITIONS.centerBottom ) {
+        x = xCenter
+        y = ~~( height - this.height );
+      } else if ( place === POSITIONS.leftCenter ) {
+        x = 0;
+        y = yCenter;
+      } else if ( place === POSITIONS.rightCenter ) {
+        x = ~~( width - this.width );
+        y = yCenter;
+      } else if ( place === POSITIONS.leftTop ) {
+        x = 0;
+        y = 0;
+      } else if ( place === POSITIONS.rightTop ) {
+        y = 0;
+        x = ~~( width - this.width );
+      } else if ( place === POSITIONS.leftBottom ) {
+        y = ~~( height - this.height );
+        x = 0;
+      } else if ( place === POSITIONS.rightBottom ) {
+        y = ~~( height - this.height );
+        x = ~~( width - this.width );
+      }
+
+      this.update( x, y );
     },
 
     /**
