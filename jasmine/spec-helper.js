@@ -20,11 +20,18 @@ function mockCTX () {
   window.th.ctx = {
     drawImage: function() {},
     beginPath: function() {},
+    arc: function() {},
+    fill: function() {},
     fillRect: function() {},
     fillStyle: function() {},
     fillText: function() {},
     save: function() {},
-    restore: function() {}
+    restore: function() {},
+    createRadialGradient: function() {
+      return {
+        addColorStop: function() {}
+      }
+    }
   };
 };
 
