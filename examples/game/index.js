@@ -25,7 +25,7 @@
         y: th.helpers.random( 0, th.canvas.height )
       } );
 
-      explosion.setImage( "../../res/img/explosion-medium.png" );
+      explosion.setImage( "../res/img/explosion-medium.png" );
       exp.push( explosion );
     }
 

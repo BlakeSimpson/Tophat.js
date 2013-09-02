@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+<project name="iOS-App" basedir="." default="init">
+
+  <target name="init" depends="load-properties, clean, build, finalise"></target>
+
+  <target name="load-properties">
+    <!-- Import properties from external .properties file -->
+    <property file="build.properties" />
+
+    <!-- Basic Directories -->
+    <property name="tools.dir" value="${basedir}/tools" />
+    <property name="build.dir" value="${basedir}/build" />
+    <property name="tmp.dir" value="${build.dir}/tmp" />
+
+    <!-- Source Directories -->
+    <property name="src.dir" value="${basedir}/src" />
+
+    <!-- Tools -->
+    <property name="jscomp.jar" location="${tools.dir}/closure-compiler.jar" />
+
+    <!-- Tasks -->
+    <taskdef name="jscomp" classname="com.google.javascript.jscomp.ant.CompileTask" classpath="${jscomp.jar}"/>
+  </target>
+
+  <target name="clean">
+    <delete dir="${tmp.dir}" />
+  </target>
+
+  <target name="finalise">
+    <delete dir="${tmp.dir}" />
+  </target>
+
+  <target name="build">
+    <mkdir dir="${tmp.dir}" />
+    <mkdir dir="${build.dir}" />
+
+    <concat destfile="${tmp.dir}/tophat.js" fixlastline="yes">
+      <filelist dir="${src.dir}" files="base.js, game.js, entity.js, text.js, helpers.js" />
+    </concat>
+
+    <jscomp compilationLevel="advanced" warning="quiet" debug="false" output="${build.dir}/tophat-${version.major}.${version.minor}.min.js">
+        <sources dir="${tmp.dir}" files="tophat.js" />
+    </jscomp>
+
+    <move file="${tmp.dir}/tophat.js" tofile="${build.dir}/tophat-${version.major}.${version.minor}.js"/>
+  </target>
+
+</project>

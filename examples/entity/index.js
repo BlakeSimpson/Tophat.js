@@ -34,7 +34,7 @@
       delay: 4,
       frames: 12
     } );
-    explosion.setImage( "../../res/img/explosion-medium.png" );
+    explosion.setImage( "../res/img/explosion-medium.png" );
 
     nextFrame();
   };
