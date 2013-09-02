@@ -35,7 +35,7 @@
     <mkdir dir="${build.dir}" />
 
     <concat destfile="${tmp.dir}/tophat.js" fixlastline="yes">
-      <filelist dir="${src.dir}" files="base.js, game.js, entity.js, text.js, helpers.js" />
+      <filelist dir="${src.dir}" files="base.js, game.js, entity.js, text.js, particle.js, helpers.js" />
     </concat>
 
     <jscomp compilationLevel="simple" warning="quiet" debug="false" output="${build.dir}/tophat-${version.major}.${version.minor}.min.js">

@@ -5,6 +5,7 @@
       this.active = false;
       this.cycles = 0;
       this.loopFunction = null;
+      this.ejecta = false;
 
       this.set( options );
       this.findCanvas();
@@ -15,11 +16,13 @@
      * Find the canvas in the document and cache the 2d context
      */
     findCanvas: function () {
-      var canvas = document.querySelector( "canvas" ),
+      var canvas = document.getElementById( "canvas" ),
         ctx = canvas.getContext( "2d" );
 
-      canvas.width = canvas.clientWidth;
-      canvas.height = canvas.clientHeight;
+      if ( !this.ejecta ) {
+        canvas.width = canvas.clientWidth;
+        canvas.height = canvas.clientHeight;
+      }
 
       global.th.ctx = ctx;
       global.th.canvas = canvas;
