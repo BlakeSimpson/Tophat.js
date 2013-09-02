@@ -1,7 +1,7 @@
 (function( global ) {
 
   var helpers = {
-    requestAnimationFrame: function( callback ) {
+    requestAnimationFrame: function ( callback ) {
       var func = (
           window.requestAnimationFrame       ||
           window.webkitRequestAnimationFrame ||
@@ -16,7 +16,7 @@
       return func( callback );
     },
 
-    collision: function( entityA, entityB ) {
+    collision: function ( entityA, entityB ) {
       if ( typeof entityA === "undefined" ||
         typeof entityB === "undefined" ||
         !entityA.active ||
@@ -31,8 +31,12 @@
         ( entityA.y + entityA.height ) > entityB.y;
     },
 
-    random: function( min, max ) {
+    random: function ( min, max ) {
       return ~~( Math.random() * ( max - min + 1 ) ) + min;
+    },
+
+    randomColor: function () {
+      return "#" + ( Math.random() * 0xFFFFFF << 0 ).toString( 16 );
     }
   };
 

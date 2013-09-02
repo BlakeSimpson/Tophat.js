@@ -42,4 +42,9 @@ describe( "Helpers", function() {
     expect( helpers.random( 5, 10 ) ).toBeInRange( 5, 10 );
   } );
 
+  it( "randomColor()", function() {
+    expect( helpers.randomColor ).toBeFunction();
+    expect( helpers.randomColor() ).toMatch( /^#[0-9a-f]{3,6}$/i );
+  } );
+
 } );

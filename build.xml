@@ -38,7 +38,7 @@
       <filelist dir="${src.dir}" files="base.js, game.js, entity.js, text.js, helpers.js" />
     </concat>
 
-    <jscomp compilationLevel="advanced" warning="quiet" debug="false" output="${build.dir}/tophat-${version.major}.${version.minor}.min.js">
+    <jscomp compilationLevel="simple" warning="quiet" debug="false" output="${build.dir}/tophat-${version.major}.${version.minor}.min.js">
         <sources dir="${tmp.dir}" files="tophat.js" />
     </jscomp>
 
