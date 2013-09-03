@@ -1,72 +1,69 @@
-(function( global ) {
+(function( global, undefined ) {
 
-  var callback, init, game,
-    maxCurves = 70,
-    p = [0,0, 0,0, 0,0, 0,0],
-    curves = [],
-    w, h, w2, h2;
+  // Set this to `true` if inside an Ejecta XCode project
+  var EJECTA = false;
+
+  var createParticle, callback, init, game, p,
+    particles = [],
+    total = 100;
+
+  createParticle = function () {
+    p = new th.Particle( {
+      x: th.helpers.random( 0, th.canvas.width ),
+      y: th.helpers.random( 0, th.canvas.height ),
+      direction: {
+        x: -2 + Math.random() * 5,
+        y: -2 + Math.random() * 5
+      },
+      r: th.helpers.random( 0, 255 ),
+      g: th.helpers.random( 0, 255 ),
+      b: th.helpers.random( 0, 255 ),
+      life: 500000,
+      radius: 15
+    } );
+
+    particles.push( p );
+  };
 
   callback = function () {
-    var ctx = th.ctx;
+    for( var i = 0; i < particles.length; i++ ) {
+      var active = particles[ i ].tick();
 
-    for( var i = 0; i < maxCurves; i++ ) {
-      var curve = curves[i];
-      curve.current += curve.inc;
-      for( var j = 0; j < p.length; j+=2 ) {
-        var a = Math.sin( curve.current * (j+3) * 373 * 0.0001 );
-        var b = Math.sin( curve.current * (j+5) * 927 * 0.0002 );
-        var c = Math.sin( curve.current * (j+5) * 573 * 0.0001 );
-        p[j] = (a * a * b + c * a + b) * w * c + w2;
-        p[j+1] = (a * b * b + c - a * b *c) * h2 + h2;
+      if ( !active ) {
+        particles[ i ] = undefined;
+        particles.splice( i, 1 );
+        createParticle();
       }
-
-      ctx.beginPath();
-      ctx.moveTo( p[0], p[1] );
-      ctx.bezierCurveTo( p[2], p[3], p[4], p[5], p[6], p[7] );
-      ctx.strokeStyle = curve.color;
-      ctx.stroke();
     }
   };
 
   init = function () {
     game = new th.Game( {
-      loopFunction: callback
+      loopFunction: callback,
+      ejecta: EJECTA,
+
+      // Override clear function to paint black and use fancy lighting
+      clear: function () {
+        var ctx = th.ctx;
+        ctx.globalCompositeOperation = "source-over";
+        ctx.fillStyle = "black";
+        ctx.fillRect( 0, 0, th.canvas.width, th.canvas.height );
+        ctx.globalCompositeOperation = "lighter";
+      }
     } );
 
-    for( var i = 0; i < 200; i++ ) {
-        curves.push({
-            current: Math.random() * 1000,
-            inc: Math.random() * 0.005 + 0.002,
-            color: th.helpers.randomColor()
-        });
+    for( var i = 0; i < total; i++ ) {
+      createParticle();
     }
 
-    w = th.canvas.width;
-    h = th.canvas.height;
-    w2 = ( w / 2 );
-    h2 = ( h / 2 );
-
-    document.addEventListener( 'touchmove', function( ev ) {
-        var x = ev.touches[0].pageX,
-          y = ev.touches[0].pageY;
-
-        document.querySelector( ".x" ).innerHTML = x;
-        document.querySelector( ".y" ).innerHTML = y;
-
-        th.ctx.lineWidth = ( x / w ) * 1;
-        maxCurves = Math.floor( ( y / h ) * curves.length );
-
-        // Allows the move event to kep on firing on android
-        if( navigator.userAgent.match(/Android/i) ) {
-          ev.preventDefault();
-        }
-    }, false );
-
     game.start();
-    //game.stop();
-    window.game = game;
   };
 
-  window.onload = init;
+  // In Ejecta there is no document to wait on loading for
+  if ( EJECTA ) {
+    init();
+  } else {
+    window.onload = init;
+  }
 
 })( this );
