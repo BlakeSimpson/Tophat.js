@@ -32,6 +32,11 @@
       this.loop = true;
 
       this.set( options );
+
+      // Give a url in options and convert to real image
+      if ( this.image && typeof this.image === "string" ) {
+        this.setImage( this.image );
+      }
     },
 
     /**
