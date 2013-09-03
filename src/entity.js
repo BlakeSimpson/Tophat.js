@@ -14,28 +14,33 @@
   th.POSITIONS = POSITIONS;
 
   var Entity = global.th.Klass.extend( {
+    active: true,
+    color: null,
+    image: null,
+    width: 0,
+    height: 0,
+    x: 0,
+    y: 0,
+
+    // For animation
+    animate: false,
+    delay: 1,
+    frames: 1,
+    currentFrame: 0,
+    currentDelay: 0,
+    loop: true,
+
     init: function ( options ) {
-      this.active = true;
-      this.color = null;
-      this.image = null;
-      this.width = 0;
-      this.height = 0;
-      this.x = 0;
-      this.y = 0;
-
-      // Animation attributes
-      this.animate = false;
-      this.delay = 1;
-      this.frames = 1;
-      this.currentFrame = 0;
-      this.currentDelay = 0;
-      this.loop = true;
-
       this.set( options );
 
+      // positions
+      if ( options && options.position ) {
+        this.position( options.position );
+      }
+
       // Give a url in options and convert to real image
-      if ( this.image && typeof this.image === "string" ) {
-        this.setImage( this.image );
+      if ( options && options.image && typeof options.image === "string" ) {
+        this.setImage( options.image );
       }
     },
 

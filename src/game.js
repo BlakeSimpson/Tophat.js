@@ -1,12 +1,12 @@
 (function( global ) {
 
   var Game = global.th.Klass.extend( {
-    init: function ( options ) {
-      this.active = false;
-      this.cycles = 0;
-      this.loopFunction = null;
-      this.ejecta = false;
+    active: false,
+    cycles: 0,
+    loopFunction: null,
+    ejecta: false,
 
+    init: function ( options ) {
       this.set( options );
       this.findCanvas();
     },

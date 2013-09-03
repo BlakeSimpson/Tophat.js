@@ -1,28 +1,28 @@
 (function( global ) {
 
   var Particle = global.th.Klass.extend( {
+    active: true,
+    radius: 10,
+    life: 20,
+
+    //Color
+    r: ( ( Math.random() * 255 ) << 0 ),
+    g: ( ( Math.random() * 255 ) << 0 ),
+    b: ( ( Math.random() * 255 ) << 0 ),
+
+    // Location
+    x: 0,
+    y: 0,
+
+    direction: {
+      x: -2.5 + Math.random() * 5,
+      y: -15 + Math.random() * 10
+    },
+
     init: function( options ) {
-      this.active = true;
-      this.radius = 10;
-      this.life = 20;
-
-      //Color
-      this.r = ( Math.random() * 255 ) << 0;
-      this.g = ( Math.random() * 255 ) << 0;
-      this.b = ( Math.random() * 255 ) << 0;
-
-      // Location
-      this.x = 0;
-      this.y = 0;
-
-      this.direction = {
-        x: -2.5 + Math.random() * 5,
-        y: -15 + Math.random() * 10
-      };
-
       this.set( options );
 
-      this._radius = this.radius + Math.random() * 20
+      this._radius = this.radius + Math.random() * 20;
       this._life = this.life + Math.random() * 10;
       this.lifeRemaining = this.life;
     },

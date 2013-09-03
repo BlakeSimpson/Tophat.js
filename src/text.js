@@ -1,18 +1,17 @@
 (function( global ) {
 
   var Text = global.th.Klass.extend( {
+    active: true,
+    content: "",
+    color: "#000",
+    fontSize: "18px",
+    fontFamily: "send-serif",
+    x: 0,
+    y: 0,
+    cyclesRun: 0,
+    maxCycles: null,
+
     init: function ( options ) {
-      this.active = true;
-      this.content = "";
-      this.color = "#000";
-      this.fontSize = "12px";
-      this.fontFamily = "sans-serif";
-      this.x = 0;
-      this.y = 0;
-
-      this.cyclesRun = 0;
-      this.maxCycles = null;
-
       this.set( options );
     },
 

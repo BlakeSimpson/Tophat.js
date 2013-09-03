@@ -26,6 +26,23 @@ describe( "Klass", function() {
     expect( fry.name ).toBe( "Fry" );
   } );
 
+  it( "should override default options through inheritance", function() {
+    var Person = th.Klass.extend( {
+      name: "Joe",
+      age: 100
+    } );
+
+    var Fry = Person.extend( {
+      name: "Fry"
+    } );
+
+    var joe = new Person();
+    var fry = new Fry();
+
+    expect( joe.name ).toBe( "Joe" );
+    expect( fry.name ).toBe( "Fry" );
+  } );
+
   it( "should `set` options", function() {
     var Person = th.Klass.extend( {
       init: function ( options ) {
