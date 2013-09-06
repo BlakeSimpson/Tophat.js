@@ -35,6 +35,30 @@ describe( "Helpers", function() {
     expect( helpers.collision( a, b ) ).toBe( false );
   } );
 
+  it( "cloneObject()", function() {
+    expect( helpers.cloneObject ).toBeFunction();
+
+    var a = {
+      x: {
+        foo: "bar",
+        grass: "green"
+      },
+      y: 1
+    };
+
+    var b = helpers.cloneObject( a );
+
+    expect( b.y ).toBe( 1 );
+    expect( b.x.foo ).toBe( "bar" );
+
+    b[ "z" ] = "new";
+    delete b.x;
+
+    expect( a.z ).toBeUndefined();
+    expect( b.x ).toBeUndefined();
+    expect( a.x ).toBeTruthy();
+  } );
+
   it( "random()", function() {
     expect( helpers.random ).toBeFunction();
 

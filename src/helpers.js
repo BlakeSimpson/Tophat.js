@@ -31,6 +31,18 @@
         ( entityA.y + entityA.height ) > entityB.y;
     },
 
+    cloneObject: function ( source ) {
+      var obj = {};
+
+      if ( source ) {
+        for ( var prop in source ) {
+          obj[ prop ] = source[ prop ];
+        }
+      }
+
+      return obj;
+    },
+
     random: function ( min, max ) {
       return ~~( Math.random() * ( max - min + 1 ) ) + min;
     },
