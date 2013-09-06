@@ -35,8 +35,8 @@ describe( "Helpers", function() {
     expect( helpers.collision( a, b ) ).toBe( false );
   } );
 
-  it( "cloneObject()", function() {
-    expect( helpers.cloneObject ).toBeFunction();
+  it( "clone()", function() {
+    expect( helpers.clone ).toBeFunction();
 
     var a = {
       x: {
@@ -46,7 +46,7 @@ describe( "Helpers", function() {
       y: 1
     };
 
-    var b = helpers.cloneObject( a );
+    var b = helpers.clone( a );
 
     expect( b.y ).toBe( 1 );
     expect( b.x.foo ).toBe( "bar" );
