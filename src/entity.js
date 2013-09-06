@@ -23,7 +23,6 @@
     y: 0,
 
     // For animation
-    animate: false,
     delay: 1,
     frames: 1,
     currentFrame: 0,
