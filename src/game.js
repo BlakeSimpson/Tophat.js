@@ -50,7 +50,8 @@
      * Clear the context for the next draw cycle
      */
     clear: function () {
-      th.ctx.clearRect( 0, 0, th.canvas.width, th.canvas.height );
+      //th.ctx.clearRect( 0, 0, th.canvas.width, th.canvas.height );
+      th.canvas.width = th.canvas.width;
     },
 
     /**
